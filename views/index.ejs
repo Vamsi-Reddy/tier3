@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		table {
+			border-collapse: collapse;
+			border: 1px solid black;
+		}
+
+		th,
+		td {
+			border: 1px solid black;
+			padding: 8px;
+		}
+	</style>
+</head>
+
+<body>
+	<form action="http://localhost:8080/insert" method="GET">
+		<label for="name">Name:</label>
+		<input type="text" id="name" name="name" required>
+		<br>
+		<input type="submit" value="Submit">
+	</form>
+	<br> <br> <br>
+	<table>
+		<tr>
+			<th>Student</th>
+		</tr>
+		<% students.forEach(function(student) { %>
+			<tr>
+				<td>
+					<%= student.name %>
+				</td>
+				<td>
+					<form action="http://localhost:8080/delete" method="GET">
+						<input type="hidden" name="studentId" value="<%= student._id %>">
+						<button type="submit">Delete</button>
+					</form>
+				</td>
+			</tr>
+			<% }); %>
+	</table>
+</body>
+
+</html>
