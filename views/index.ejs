@@ -7,8 +7,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<style>
+		body {
+			background-color: lightgrey;
+		}
+
 		table {
 			border-collapse: collapse;
+			margin-top: 3rem;
 			border: 1px solid black;
 		}
 
@@ -17,35 +22,46 @@
 			border: 1px solid black;
 			padding: 8px;
 		}
+
+		#myflex {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		#del:hover {
+			background-color: rgba(246, 116, 116, 0.821);
+		}
 	</style>
 </head>
 
 <body>
-	<form action="http://localhost:8080/insert" method="GET">
-		<label for="name">Name:</label>
-		<input type="text" id="name" name="name" required>
-		<br>
-		<input type="submit" value="Submit">
-	</form>
-	<br> <br> <br>
-	<table>
-		<tr>
-			<th>Student</th>
-		</tr>
-		<% students.forEach(function(student) { %>
+	<div id="myflex">
+		<form action="<%=apie%>/insert" method="POST" autocomplete="off">
+			<label for="name" style="font-weight: bolder; font-size: large;">Name:</label>
+			<input type="text" id="name" name="name" required>
+			<input type="submit" value="Submit">
+		</form>
+		<table>
 			<tr>
-				<td>
-					<%= student.name %>
-				</td>
-				<td>
-					<form action="http://localhost:8080/delete" method="GET">
-						<input type="hidden" name="studentId" value="<%= student._id %>">
-						<button type="submit">Delete</button>
-					</form>
-				</td>
+				<th>Student</th>
+				<th>Delete</th>
 			</tr>
-			<% }); %>
-	</table>
+			<% students.forEach(function(student) { %>
+				<tr>
+					<td>
+						<%= student.Name %>
+					</td>
+					<td>
+						<form action="<%=apie%>/delete" method="post">
+							<input type="hidden" name="studentId" value="<%= student.Personid %>">
+							<button type="submit" id="del">Delete</button>
+						</form>
+					</td>
+				</tr>
+				<% }); %>
+		</table>
+	</div>
 </body>
 
 </html>
