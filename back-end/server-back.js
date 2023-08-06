@@ -1,12 +1,13 @@
+require('dotenv').config();
 const express = require("express")
 const app = express()
 var mysql = require('mysql');
 const bodyParser = require('body-parser')
 
 var con = mysql.createConnection({
-	host: "node-sql.ceqxw7fztytm.us-west-1.rds.amazonaws.com",
-	user: "admin",
-	password: "vamsiadmin",
+	host: process.env.RDS_EP,
+	user: process.env.USR,
+	password: process.env.PASS,
 	multipleStatements: true
 });
 
@@ -50,4 +51,4 @@ app.post('/slist', (req, res) => {
 	});
 })
 
-app.listen(8080, () => console.log("Listening ...."))
+app.listen(process.env.BACK_PORT, () => console.log("Listening ...."))
